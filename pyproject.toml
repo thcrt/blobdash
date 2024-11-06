@@ -1,0 +1,27 @@
+[project]
+name = "blobdash"
+version = "0.1.0-dev"
+readme = "README.md"
+authors = [
+    { name = "thcrt", email = "110127860+thcrt@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.0.3",
+    "waitress>=3.0.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.7.2",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.format]
+docstring-code-format = true

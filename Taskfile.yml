@@ -1,0 +1,50 @@
+version: '3'
+
+vars:
+  # Port to run prod/dev server on can be overridden on the command-line:
+  #   $ PORT=1234 task run
+  PORT: "{{.PORT | default 8000}}"
+
+tasks:
+  list:
+    # If no task is specified, we use the magic variable `TASK_EXE` to call `task` again with `--list-all`.
+    # See https://github.com/go-task/task/issues/1562.
+    aliases: [default]
+    silent: true
+    desc: List available tasks
+    cmds:
+      - "{{.TASK_EXE}} --list-all"
+
+  serve:
+    label: Serving
+    aliases: [prod]
+    desc: Run `blobdash` in a production environment
+    cmds:
+      - uv run waitress-serve --port {{.PORT}} --call blobdash:create_app
+  
+  run:
+    label: Running
+    aliases: [dev]
+    desc: Run `blobdash` in a development environment
+    cmds:
+      - uv run flask --debug --app blobdash run --port {{.PORT}}
+  
+  _lint:
+    internal: true
+    label: Linting
+    cmds:
+      - uv run ruff check --fix
+  
+  _format:
+    internal: true
+    label: Formatting
+    cmds:
+      - uv run ruff format
+  
+  check:
+    aliases: [lint, format]
+    desc: Run linting and formatting checks and fixes
+    cmds:
+      - task: _lint
+      - task: _format
+    
