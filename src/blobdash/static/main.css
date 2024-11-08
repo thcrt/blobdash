@@ -128,6 +128,8 @@ body {
 #menu {
     display: flex;
     background-color: var(--color-muted-1);
+    border-inline-end: 1px solid var(--color-muted-2);
+    flex: none;
 
     /* Menu is a horizontal, fixed height menubar on mobile  */
     @media (width < 650px) {
@@ -231,4 +233,61 @@ body {
         }
     }
 
+}
+
+main {
+    display: flex;
+
+    @media (width < 650px) {
+        flex-flow: column nowrap;
+        align-items: center;
+    }
+    @media (width >= 650px) {
+        flex-flow: row wrap;
+    }
+    
+    align-content: start;
+    margin: 1.5rem;
+    gap: 1.5rem;
+
+    section {
+        display: grid;
+        grid-template:
+            "icon   name" auto
+            "icon   desc" auto
+            /6.875rem   auto;
+
+        height: 10rem;
+        width: 25rem;
+        max-width: 100%;
+
+        border: 1px solid var(--color-muted-1);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        column-gap: 1.5rem;
+
+        img {
+            grid-area: icon;
+            height: 100%;
+            align-self: center;
+        }
+        h3 {
+            grid-area: name;
+            align-self: end;
+            font-size: 3rem;
+            font-weight: 700;
+
+            &::after {
+                @media (width >= 650px) {
+                    content: ".blobc.at";
+                    font-size: 1.5rem;
+                    color: var(--color-muted-3)
+                }
+            }
+        }
+        p {
+            grid-area: desc;
+        }
+
+    }
 }
