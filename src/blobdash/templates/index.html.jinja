@@ -10,10 +10,12 @@
 
     <link rel="stylesheet" href="/static/main.css">
 
-    {% if settings['accent_color'] %}
+    <title>{{ settings.name }}</title>
+
+    {% if settings.accent_color %}
         <style>
             :root {
-                --color-accent: #{{ settings['accent_color'] }};
+                --color-accent: #{{ settings.accent_color }};
             }
         </style>
     {% endif %}
@@ -22,18 +24,18 @@
 <body>
     <div id="menu">
         <h1>
-            <img alt="The {{ settings['name'] }} logo" src="{{ settings['logo'] }}">
+            <img alt="The {{ settings.name }} logo" src="{{ settings.logo }}">
             <span class="blobcat">
-                {{ settings['name'] }}
+                {{ settings.name }}
             </span>
         </h1>
-        {% if settings['dashdot']['enabled'] %}
+        {% if settings.dashdot.enabled %}
             <div class="dashdot">
-                {% for widget in settings['dashdot']['widgets'] %}
+                {% for widget in settings.dashdot.widgets %}
                     <section>
                         <h3>{{ widget }}</h3>
                         <iframe
-                            src="{{ settings['dashdot']['host'] }}?graph={{ widget }}&color={{ settings['accent_color'] }}&showPercentage={{ settings['dashdot']['show_values'] | string | lower }}"
+                            src="{{ settings.dashdot.host }}?graph={{ widget }}&color={{ settings.accent_color }}&showPercentage={{ settings.dashdot.show_values | string | lower }}"
                             style="border-radius: 20px"
                             allowtransparency="true"
                             frameborder="0">
@@ -44,7 +46,7 @@
         {% endif %}
         <div class="end">
             {% if user %}
-                <a class="user" href="{{ settings['auth']['logout_url'] }}">
+                <a class="user" href="{{ settings.auth.logout_url }}">
                     <span>{{ user }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
                         <path fill="currentColor" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24M74.08 197.5a64 64 0 0 1 107.84 0a87.83 87.83 0 0 1-107.84 0M96 120a32 32 0 1 1 32 32a32 32 0 0 1-32-32m97.76 66.41a79.66 79.66 0 0 0-36.06-28.75a48 48 0 1 0-59.4 0a79.66 79.66 0 0 0-36.06 28.75a88 88 0 1 1 131.52 0" />
@@ -56,19 +58,19 @@
                     © 2024
                 </p>
                 <a href="#">
-                    about
+                    about {{ settings.name }}
                 </a>
             </div>
         </div>
     </div>
     <main>
-        {% for service in settings['services'].values() %}
-        <a href="{{ service['url'] }}">
-            <img src="{{ service['icon'] }}">
+        {% for service in settings.services.values() %}
+        <a href="{{ service.url }}">
+            <img src="{{ service.icon }}">
             <h3>
-                {{ service['name'] }}<span>.{{ service['domain'] | default(settings['service_domain']) }}</span>
+                {{ service.name }}<span>.{{ service.domain | default(settings.service_domain) }}</span>
             </h3>
-            <p>{{ service['desc'] }}</p>
+            <p>{{ service.desc }}</p>
         </a>
         {% endfor %} 
     </main>
