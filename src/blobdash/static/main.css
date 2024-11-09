@@ -141,6 +141,7 @@ body {
     @media (width >=650px) {
         flex-direction: column;
         width: 15rem;
+        min-width: fit-content;
         padding: 0.5rem;
     }
 
@@ -277,13 +278,17 @@ main {
             align-self: end;
             font-size: 3rem;
             font-weight: 700;
+            display: inline;
+        
+            span {
+                font-size: 1.5rem;
+                grid-area: name;
+                display: inline;
+                line-height: 1;
+                color: var(--color-muted-3);
 
-            &::after {
-                @media (width >= 650px) {
-                    content: ".blobc.at";
-                    font-size: 1.5rem;
-                    line-height: 1;
-                    color: var(--color-muted-3)
+                @media (width < 650px) {
+                    display: none;
                 }
             }
         }

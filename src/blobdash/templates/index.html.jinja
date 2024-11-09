@@ -9,14 +9,22 @@
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
     <link rel="stylesheet" href="/static/main.css">
+
+    {% if settings['accent_color'] %}
+        <style>
+            :root {
+                --color-accent: {{ settings['accent_color'] }};
+            }
+        </style>
+    {% endif %}
 </head>
 
 <body>
     <div id="menu">
         <h1>
-            <img alt="The blobcat logo" src="https://logos.blobc.at/blobcat.png">
+            <img alt="The {{ settings['name'] }} logo" src="{{ settings['logo'] }}">
             <span class="blobcat">
-                blobcat
+                {{ settings['name'] }}
             </span>
         </h1>
         <div class="user">
@@ -35,26 +43,15 @@
         </div>
     </div>
     <main>
-        <section>
-            <img src="https://logos.blobc.at/ruflix.png">
-            <h3>ruflix</h3>
-            <p>watch movies and tv</p>
-        </section>
-        <section>
-            <img src="https://logos.blobc.at/ruflix.png">
-            <h3>ruflix</h3>
-            <p>watch movies and tv</p>
-        </section>
-        <section>
-            <img src="https://logos.blobc.at/ruflix.png">
-            <h3>ruflix</h3>
-            <p>watch movies and tv</p>
-        </section>
-        <section>
-            <img src="https://logos.blobc.at/ruflix.png">
-            <h3>ruflix</h3>
-            <p>watch movies and tv</p>
-        </section>
+        {% for service in settings['services'].values() %}
+            <section>
+                <img src="{{ service['icon'] }}">
+                <h3>
+                    {{ service['name'] }}<span>.{{ service['domain'] | default(settings['service_domain']) }}</span>
+                </h3>
+                <p>{{ service['desc'] }}</p>
+            </section>
+        {% endfor %} 
     </main>
 </body>
 

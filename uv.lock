@@ -15,6 +15,7 @@ name = "blobdash"
 version = "0.1.0.dev0"
 source = { editable = "." }
 dependencies = [
+    { name = "click" },
     { name = "flask" },
     { name = "waitress" },
 ]
@@ -26,6 +27,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "click", specifier = ">=8.1.7" },
     { name = "flask", specifier = ">=3.0.3" },
     { name = "waitress", specifier = ">=3.0.1" },
 ]
