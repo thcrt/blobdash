@@ -338,9 +338,6 @@ dialog {
         font-size: 1.25em;
         overflow: scroll;
 
-        p {
-        }
-
         * {
             line-height: 1.5;
             margin-block-end: 1rem;
