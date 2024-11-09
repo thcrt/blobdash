@@ -191,6 +191,10 @@ body {
                 font-weight: 500;
                 margin-inline-start: 0.5rem;
             }
+
+            iframe {
+                border-radius: var(--radius);
+            }
         }
     }
 
