@@ -113,16 +113,6 @@ body {
     @media (width >=650px) {
         flex-direction: row;
     }
-
-    .blobcat {
-        color: var(--color-accent);
-        font-weight: bolder;
-    }
-
-    a {
-        color: inherit;
-        font-weight: bolder;
-    }
 }
 
 #menu {
@@ -157,12 +147,14 @@ body {
         display: flex;
         justify-content: center;
         gap: 0.25rem;
-
+        
         img {
             height: 2.5rem;
         }
-
+        
         span {
+            color: var(--color-accent);
+            font-weight: bolder;
             font-size: 2.5rem;
 
             @media (width < 650px) {
@@ -246,6 +238,8 @@ body {
         color: var(--color-muted-4);
 
         a {
+            color: inherit;
+            font-weight: bolder;
             text-decoration: underline solid 2px var(--color-muted-3);
         }
 
@@ -273,7 +267,10 @@ main {
     margin: 1.5rem;
     gap: 1.5rem;
 
-    section {
+    a {
+        text-decoration: none;
+        color: inherit;
+
         display: grid;
         grid-template:
             "icon   name" auto
@@ -289,6 +286,15 @@ main {
         border-radius: var(--radius);
         padding: 1.5rem;
         column-gap: 1.5rem;
+
+        transition:
+            background-color 100ms,
+            border-color 100ms;
+
+        &:hover {
+            background-color: var(--color-muted-1);
+            border-color: var(--color-muted-2);
+        }
 
         img {
             grid-area: icon;

@@ -59,13 +59,13 @@
     </div>
     <main>
         {% for service in settings['services'].values() %}
-            <section>
-                <img src="{{ service['icon'] }}">
-                <h3>
-                    {{ service['name'] }}<span>.{{ service['domain'] | default(settings['service_domain']) }}</span>
-                </h3>
-                <p>{{ service['desc'] }}</p>
-            </section>
+        <a href="{{ service['url'] }}">
+            <img src="{{ service['icon'] }}">
+            <h3>
+                {{ service['name'] }}<span>.{{ service['domain'] | default(settings['service_domain']) }}</span>
+            </h3>
+            <p>{{ service['desc'] }}</p>
+        </a>
         {% endfor %} 
     </main>
 </body>
