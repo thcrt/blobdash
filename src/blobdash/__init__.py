@@ -1,7 +1,7 @@
 import flask as f
 from click import secho
-import jinja2
 import tomllib
+
 
 def create_app():
     app = f.Flask(__name__)
@@ -16,13 +16,13 @@ def create_app():
     @app.route("/")
     def index():
         return f.render_template(
-            "index.html.jinja", 
-            settings=app.settings, 
-            user=f.request.headers.get(app.settings['auth']['header'])
+            "index.html.jinja",
+            settings=app.settings,
+            user=f.request.headers.get(app.settings["auth"]["header"]),
         )
-    
+
     @app.route("/about")
     def about():
-        return app.settings['about']
+        return app.settings["about"]
 
     return app
