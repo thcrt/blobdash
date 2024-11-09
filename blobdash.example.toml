@@ -3,6 +3,16 @@ logo = "https://www.pngmart.com/files/11/Rickrolling-PNG-Pic.png"
 accent_color = "#dc2626"
 service_domain = "example.com"
 
+[dashdot]
+enabled = true
+host = "https://dash.mauz.dev"
+show_values = true
+widgets = [
+    "cpu",
+    "ram",
+    "network",
+]
+
 [services.calibre-web]
 name = "librarian"
 desc = "read ebooks"

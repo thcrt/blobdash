@@ -173,6 +173,28 @@ body {
         }
     }
 
+    .dashdot {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-block: 2rem;
+    
+        @media (width < 650px) {
+            display: none;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            h3 {
+                font-weight: 500;
+                margin-inline-start: 0.5rem;
+            }
+        }
+    }
+
     .user {
         @media (width < 650px) {
             /* Icon before name */

@@ -13,7 +13,7 @@
     {% if settings['accent_color'] %}
         <style>
             :root {
-                --color-accent: {{ settings['accent_color'] }};
+                --color-accent: #{{ settings['accent_color'] }};
             }
         </style>
     {% endif %}
@@ -27,6 +27,21 @@
                 {{ settings['name'] }}
             </span>
         </h1>
+        {% if settings['dashdot']['enabled'] %}
+            <div class="dashdot">
+                {% for widget in settings['dashdot']['widgets'] %}
+                    <section>
+                        <h3>{{ widget }}</h3>
+                        <iframe
+                            src="{{ settings['dashdot']['host'] }}?graph={{ widget }}&color={{ settings['accent_color'] }}&showPercentage={{ settings['dashdot']['show_values'] | string | lower }}"
+                            style="border-radius: 20px"
+                            allowtransparency="true"
+                            frameborder="0">
+                        </iframe>
+                    </section>
+                {% endfor %}
+            </div>
+        {% endif %}
         <div class="user">
             <span>Test User</span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
