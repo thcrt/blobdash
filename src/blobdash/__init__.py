@@ -20,5 +20,9 @@ def create_app():
             settings=app.settings, 
             user=f.request.headers.get(app.settings['auth']['header'])
         )
+    
+    @app.route("/about")
+    def about():
+        return app.settings['about']
 
     return app

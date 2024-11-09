@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
+    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="/static/main.css">
 
     <title>{{ settings.name }}</title>
@@ -25,7 +27,7 @@
     <div id="menu">
         <h1>
             <img alt="The {{ settings.name }} logo" src="{{ settings.logo }}">
-            <span class="blobcat">
+            <span>
                 {{ settings.name }}
             </span>
         </h1>
@@ -56,12 +58,36 @@
                 <p>
                     © 2024
                 </p>
-                <a href="#">
+                <a href="#" id="about-link">
                     about {{ settings.name }}
                 </a>
             </div>
         </div>
     </div>
+    <dialog hx-get="/about" hx-trigger="click from:#about-link" hx-target="#about-content" hx-on::after-swap="this.showModal();">
+        <h1>
+            <img alt="The {{ settings.name }} logo" src="{{ settings.logo }}">
+            <span>
+                {{ settings.name }}
+            </span>
+        </h1>
+        <form method="dialog">
+            <button class="close">✕</button>
+        </form>
+        <div id="about-content">
+            <h3>About this dashboard</h3>
+            <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and scrambled it to make a type specimen book.
+                It has survived not only five centuries, but also the leap into electronic
+                typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+                the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+                with desktop publishing software like Aldus PageMaker including versions of Lorem
+                Ipsum.
+            </p>
+        </div>
+    </dialog>
     <main>
         {% for service in settings.services.values() %}
         <a href="{{ service.url }}">
