@@ -257,17 +257,23 @@ body {
 main {
     display: flex;
 
-    @media (width < 650px) {
+    @media (width < 400px) {
+        flex-flow: row wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+    @media (400px <= width < 650px) {
         flex-flow: column nowrap;
         align-items: center;
+        gap: 1.5rem;
     }
     @media (width >= 650px) {
         flex-flow: row wrap;
+        gap: 1.5rem;
     }
     
     align-content: start;
     padding: 1.5rem;
-    gap: 1.5rem;
 
     overflow: scroll;
 
@@ -276,34 +282,10 @@ main {
         color: inherit;
 
         display: grid;
-        grid-template:
-            "icon   name" auto
-            "icon   desc" auto
-            /6.875rem   auto;
 
-        height: 10rem;
-
-        @media (width < 400px) {
-            grid-template-columns: auto 0;
-        }
-        
-        @media (width > 400px) {
-            column-gap: 1.5rem;
-        }
-        
-        @media (width < 650px) {
-            width: 100%;
-        }
-        
-        @media (width >= 650px) {
-            min-width: fit-content;
-            width: 25rem;
-            max-width: 100%;
-        }
-        
         border: 1px solid var(--color-muted-1);
         border-radius: var(--radius);
-        padding: 1.5rem;
+
 
         transition:
             background-color 100ms,
@@ -313,6 +295,39 @@ main {
             background-color: var(--color-muted-1);
             border-color: var(--color-muted-2);
         }
+        
+
+        @media (width < 400px) {
+            grid-template:
+                "icon" auto
+                "name" auto
+                /auto;
+            row-gap: 0.25rem;
+            width: 6.125rem;
+            height: 6.125rem;
+            padding: 0.5rem;
+        }
+        
+        @media (width > 400px) {
+            grid-template:
+                "icon   name" auto
+                "icon   desc" auto
+                /6.875rem   auto;
+            column-gap: 1.5rem;
+            height: 10rem;
+            padding: 1.5rem;
+        }
+        
+        @media (400px <= width < 650px) {
+            width: 100%;
+        }
+        
+        @media (width >= 650px) {
+            min-width: fit-content;
+            width: 25rem;
+            max-width: 100%;
+        }
+        
 
         img {
             grid-area: icon;
@@ -320,15 +335,18 @@ main {
             align-self: center;
             justify-self: center;
         }
+        
         h3 {
             grid-area: name;
             align-self: end;
             font-size: 3rem;
             font-weight: 700;
             display: inline;
-
+            
             @media (width < 400px) {
-                display: none;
+                font-size: 1rem;
+                text-align: center;
+                font-weight: 500;
             }
         
             span {
