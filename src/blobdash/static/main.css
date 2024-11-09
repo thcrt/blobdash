@@ -113,6 +113,11 @@ body {
     @media (width >=650px) {
         flex-direction: row;
     }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
 }
 
 #menu {
@@ -189,6 +194,14 @@ body {
         }
     }
 
+    .end {
+        margin-block-start: auto;
+        
+        @media (width < 650px) {
+            margin-inline-start: auto;
+        }
+    }
+
     .user {
         @media (width < 650px) {
             /* Icon before name */
@@ -214,9 +227,20 @@ body {
         border-radius: var(--radius);
         
         align-self: center;
-        margin-inline-start: auto;
-        margin-block-start: auto;
-        
+
+        transition:
+            background-color 100ms,
+            border-color 100ms;
+
+        &:hover {
+            background-color: var(--color-muted-1);
+            border-color: var(--color-muted-2);
+
+            span::after {
+                content: ' (log out)';
+                color: #dc2626;
+            }
+        }
         
         svg {
             height: 1.5rem;
@@ -238,12 +262,6 @@ body {
         justify-content: space-between;
         font-size: 0.65rem;
         color: var(--color-muted-4);
-
-        a {
-            color: inherit;
-            font-weight: bolder;
-            text-decoration: underline solid 2px var(--color-muted-3);
-        }
 
         @media (width < 650px) {
             /* Don't display on mobile, not enough space */
@@ -279,7 +297,6 @@ main {
 
     a {
         text-decoration: none;
-        color: inherit;
 
         display: grid;
 

@@ -15,6 +15,10 @@ def create_app():
 
     @app.route("/")
     def index():
-        return f.render_template("index.html.jinja", settings=app.settings)
+        return f.render_template(
+            "index.html.jinja", 
+            settings=app.settings, 
+            user=f.request.headers.get(app.settings['auth']['header'])
+        )
 
     return app

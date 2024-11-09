@@ -3,6 +3,10 @@ logo = "https://www.pngmart.com/files/11/Rickrolling-PNG-Pic.png"
 accent_color = "dc2626"
 service_domain = "example.com"
 
+[auth]
+header = "X-App-User"
+logout_url = "https://example.com"
+
 [dashdot]
 enabled = true
 host = "https://dash.mauz.dev"
