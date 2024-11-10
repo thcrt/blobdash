@@ -3,6 +3,5 @@
 blobdash.example.toml
 blobdash.toml
 Dockerfile
-README.md
 Taskfile.yml
 **/__pycache__
