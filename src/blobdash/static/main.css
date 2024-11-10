@@ -421,9 +421,21 @@ main {
 
         img {
             grid-area: icon;
-            height: 100%;
-            align-self: center;
             justify-self: center;
+
+            /*  This looks bad when icons aren't very square. There's a better way to do this, but
+            it doesn't work on Safari. Thanks, Steve.
+            See: https://stackoverflow.com/questions/57516373/image-stretching-in-flexbox-in-safari
+            https://github.com/neptunian/react-photo-gallery/issues/174
+            https://discourse.webflow.com/t/css-grid-stretch-in-safari-after-yesterdays-update/142799/4
+            */
+            @media (width < 400px) {
+                max-width: 3rem;
+            }
+            @media (width >= 400px) {
+                height: 100%;
+                align-self: center;
+            }
         }
         
         h3 {
