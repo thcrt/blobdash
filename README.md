@@ -10,9 +10,7 @@
 ![GitHub Release](https://img.shields.io/github/v/release/thcrt/blobdash?style=for-the-badge)
 ![Free Palestine Badge](https://img.shields.io/badge/Free%20-%20Palestine%20-%20red?style=for-the-badge)
 
-<img style="display: inline; height: 15rem;" src="./docs/screenshots/desktop.png">
-<img style="display: inline; height: 15rem;" src="./docs/screenshots/phone-lg.png">
-<img style="display: inline; height: 15rem;" src="./docs/screenshots/phone-sm.png">
+<img style="display: inline; height: 18rem;" src="./docs/screenshots/desktop.png"> <img style="display: inline; height: 18rem;" src="./docs/screenshots/phone-lg.png"> <img style="display: inline; height: 18rem;" src="./docs/screenshots/phone-sm.png">
 
 
 </center>
