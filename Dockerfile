@@ -24,4 +24,4 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 ENTRYPOINT []
 
 # Let's run this thing
-CMD ["uv", "run", "waitress-serve", "--call", "blobdash:create_app"]
+CMD ["waitress-serve", "--call", "blobdash:create_app"]

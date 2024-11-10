@@ -6,11 +6,18 @@ import tomllib
 def create_app():
     app = f.Flask(__name__)
 
-    try:
-        with open("blobdash.toml", "rb") as settings_file:
-            app.settings = tomllib.load(settings_file)
-    except FileNotFoundError:
-        secho("Config file `blobdash.toml` wasn't found!", bold=True, fg="bright_red")
+    for path in ["blobdash.toml", "/blobdash.toml"]:
+        try:
+            with open(path, "rb") as file:
+                app.settings = tomllib.load(file)
+            secho(f"Loaded settings from {path} successfully.")
+            break
+        except FileNotFoundError:
+            pass
+    else:
+        # `else` clause in `for` loop is called when the loop executed without `break`ing at least once
+        # in this case, it means none of the files were found
+        secho("Config file `blobdash.toml` wasn't found anywhere!", bold=True, fg="bright_red")
         raise SystemExit(1)
 
     @app.route("/")
