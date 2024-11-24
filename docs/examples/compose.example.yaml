@@ -1,0 +1,22 @@
+services:
+  server:
+    image: ghcr.io/thcrt/blobdash:latest  # Pin a version!
+    restart: unless-stopped
+
+    volumes:
+      - ./blobdash.toml:/blobdash.toml
+    ports:
+      - '80:8080'
+
+  # Example of dashdot integration
+  dashdot:
+    image: mauricenino/dashdot:latest
+    restart: unless-stopped
+    privileged: true
+    
+    volumes:
+      - /:/mnt/host:ro
+    ports:
+      - '8080:3001'
+    environment:
+      DASHDOT_ALWAYS_SHOW_PERCENTAGES: "true"

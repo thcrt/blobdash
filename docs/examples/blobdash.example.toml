@@ -1,5 +1,12 @@
+# blobdash.example.toml
+#
+# This is an example configuration file for blobdash (https://github.com/thcrt/blobdash).
+#
+# To get started quickly, copy it to `blobdash.toml`, make edits and bind mount it to your blobdash
+# container.
+
 name = "mydash"
-logo = "https://www.pngmart.com/files/11/Rickrolling-PNG-Pic.png"
+logo = "https://raw.githubusercontent.com/thcrt/blobdash/refs/heads/main/src/blobdash/static/blobcat.png"
 accent_color = "#dc2626"
 service_domain = "example.com"
 
@@ -16,7 +23,7 @@ about = """
 
 [auth]
 header = "X-App-User"
-logout_url = "https://example.com"
+logout_url = "#"
 
 [dashdot]
 enabled = true
@@ -32,42 +39,42 @@ widgets = [
 name = "librarian"
 desc = "read ebooks"
 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/calibre-web.png"
-url = "https://google.com"
+url = "#"
 
 [services.drawio]
 name = "draw"
 desc = "create drawings and diagrams"
 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/draw-io.png"
-url = "https://google.com"
+url = "#"
 
 [services.grocy]
 name = "food"
 desc = "plan meals and track ingredients"
 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/grocy.png"
-url = "https://google.com"
+url = "#"
 
 [services.homeassistant]
 name = "home"
 domain = "internal.example.com"
 desc = "control heaters, curtains and lights"
 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/home-assistant.png"
-url = "https://google.com"
+url = "#"
 
 [services.immich]
 name = "photos"
 desc = "maintain a photo library"
 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/immich.png"
-url = "https://google.com"
+url = "#"
 
 [services.jellyfin]
 name = "flix"
 domain = "seedbox.example.com"
 desc = "watch movies and tv"
 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/jellyfin.png"
-url = "https://google.com"
+url = "#"
 
 [services.paperless-ngx]
 name = "paper"
 desc = "archive important documents"
 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/paperless-ngx.png"
-url = "https://google.com"
+url = "#"
