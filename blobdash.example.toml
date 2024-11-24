@@ -1,6 +1,6 @@
-name = "exampledash"
+name = "mydash"
 logo = "https://www.pngmart.com/files/11/Rickrolling-PNG-Pic.png"
-accent_color = "dc2626"
+accent_color = "#dc2626"
 service_domain = "example.com"
 
 about = """
