@@ -17,7 +17,7 @@
     {% if settings.accent_color %}
         <style>
             :root {
-                --color-accent: #{{ settings.accent_color }};
+                --color-accent: {{ settings.accent_color }};
             }
         </style>
     {% endif %}
@@ -37,7 +37,7 @@
                     <section>
                         <h3>{{ widget }}</h3>
                         <iframe
-                            src="{{ settings.dashdot.host }}?graph={{ widget }}&color={{ settings.accent_color }}&showPercentage={{ settings.dashdot.show_values | string | lower }}"
+                            src="{{ settings.dashdot.host }}?graph={{ widget }}&color={{ settings.accent_color.as_hex() | trim('#') }}&showPercentage={{ settings.dashdot.show_values | string | lower }}"
                             allowtransparency="true"
                             frameborder="0">
                         </iframe>
