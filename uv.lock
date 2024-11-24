@@ -21,7 +21,7 @@ wheels = [
 
 [[package]]
 name = "blobdash"
-version = "0.3.2.dev0"
+version = "0.3.2"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
