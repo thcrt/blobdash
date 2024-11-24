@@ -29,14 +29,14 @@ class DashdotSettings(BaseModel):
 class Service(BaseModel):
     name: str = "service"
     desc: str = "a cool service"
-    icon: str = "https://www.pngmart.com/files/11/Rickrolling-PNG-Pic.png"
+    icon: str = "/static/blobcat.png"
     url: str = "https://google.com"
 
 
 class Settings(BaseSettings):
-    name: str = "exampledash"
-    logo: str = "https://www.pngmart.com/files/11/Rickrolling-PNG-Pic.png"
-    accent_color: color.Color = "#dc2626"
+    name: str = "mydash"
+    logo: str = "/static/blobcat.png"
+    accent_color: color.Color = "#fcc21b"
     service_domain: str = "example.com"
 
     about: str = """
