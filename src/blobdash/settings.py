@@ -19,6 +19,7 @@ class DashdotSettings(BaseModel):
     enabled: bool = True
     host: str = "https://dash.mauz.dev"
     show_values: bool = True
+    split_view: bool = False
     widgets: list = [
         "cpu",
         "ram",

@@ -44,6 +44,9 @@ By default, this is set to `"https://dash.mauz.dev"`, a demo instance run by the
 ### `show_values`
 Whether to display numerical values on the graphs.
 
+### `split_view`
+Whether to show storage devices in [split view](https://getdashdot.com/docs/integration/widgets#multiview). Doesn't apply to CPU cores.
+
 ### `widgets`
 A list of the statistics that should be displayed as graphs. Allowed values can be seen at [dashdot's documentation](https://getdashdot.com/docs/integration/widgets#graph). At the time of writing, the list can contain:
 - `"cpu"`
