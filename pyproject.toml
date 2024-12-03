@@ -13,6 +13,7 @@ dependencies = [
     "pydantic>=2.10.1",
     "pydantic-settings>=2.6.1",
     "waitress>=3.0.1",
+    "authentik-client>=2024.10.4.post1733219872",
 ]
 
 [build-system]

@@ -2,6 +2,8 @@ import flask as f
 from click import secho
 from pydantic import ValidationError
 
+# import authentik_client
+
 from .settings import Settings
 
 
@@ -20,11 +22,12 @@ def create_app():
 
     @app.route("/")
     def index():
-        return f.render_template(
-            "index.html.jinja",
-            settings=app.settings,
-            user=f.request.headers.get(app.settings.auth.header),
-        )
+        if (header_user := f.request.headers.get(app.settings.auth.header)) is not None:
+            user = header_user
+        else:
+            user = app.settings.auth.default_user
+
+        return f.render_template("index.html.jinja", settings=app.settings, user=user)
 
     @app.route("/about")
     def about():

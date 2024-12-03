@@ -1,4 +1,6 @@
-from typing import Tuple, Type
+from typing import Tuple, Type, Optional
+
+import urllib.parse
 
 from pydantic import BaseModel
 from pydantic_extra_types import color
@@ -11,8 +13,16 @@ from pydantic_settings import (
 
 
 class AuthSettings(BaseModel):
+    enabled: bool = False
     header: str = "X-App-User"
-    logout_url: str = "https://example.com"
+    default_user: Optional[str] = None
+    host: str = "https://auth.example.com"
+    token: str = "changeme"
+    logout_flow: str = "/flows/-/default/invalidation"
+
+    @property
+    def logout_url(self):
+        return urllib.parse.urljoin(self.host, self.logout_flow)
 
 
 class DashdotSettings(BaseModel):
