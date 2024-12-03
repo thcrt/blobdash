@@ -22,10 +22,9 @@ def create_app():
 
     @app.route("/")
     def index():
-        if (header_user := f.request.headers.get(app.settings.auth.header)) is not None:
-            user = header_user
-        else:
-            user = app.settings.auth.default_user
+        if app.settings.auth.enabled:
+            user = f.request.headers.get(app.settings.auth.header)
+            user = app.settings.auth.default_user if user is None else user
 
         return f.render_template("index.html.jinja", settings=app.settings, user=user)
 
