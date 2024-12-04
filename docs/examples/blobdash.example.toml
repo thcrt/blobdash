@@ -21,10 +21,6 @@ about = """
 </p>
 """
 
-[auth]
-header = "X-App-User"
-logout_url = "#"
-
 [dashdot]
 enabled = true
 host = "https://dash.mauz.dev"
@@ -35,46 +31,25 @@ widgets = [
     "network",
 ]
 
-[services.calibre-web]
+[auth]
+enabled = true
+header = "X-App-User"
+logout_url = "#"
+
+# To fetch apps from an authentik instance, modify and uncomment the below options.
+# [auth.apps]
+# enabled = true
+# host = "https://auth.example.com"
+# token = "super-secret-token"
+
+# An example of an app being manually added 
+[apps.calibre-web]
 name = "librarian"
 desc = "read ebooks"
 icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/calibre-web.png"
 url = "#"
 
-[services.drawio]
-name = "draw"
-desc = "create drawings and diagrams"
-icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/draw-io.png"
-url = "#"
-
-[services.grocy]
-name = "food"
-desc = "plan meals and track ingredients"
-icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/grocy.png"
-url = "#"
-
-[services.homeassistant]
-name = "home"
-domain = "internal.example.com"
-desc = "control heaters, curtains and lights"
-icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/home-assistant.png"
-url = "#"
-
-[services.immich]
-name = "photos"
-desc = "maintain a photo library"
-icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/immich.png"
-url = "#"
-
-[services.jellyfin]
-name = "flix"
-domain = "seedbox.example.com"
+# We can also only set some attributes, overriding apps fetched from the auth provider
+[apps.jellyfin]
+name = "notflix"
 desc = "watch movies and tv"
-icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/jellyfin.png"
-url = "#"
-
-[services.paperless-ngx]
-name = "paper"
-desc = "archive important documents"
-icon = "https://cdn.jsdelivr.net/gh/selfhst/icons/png/paperless-ngx.png"
-url = "#"
