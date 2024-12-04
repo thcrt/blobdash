@@ -450,18 +450,6 @@ main {
                 text-align: center;
                 font-weight: 500;
             }
-        
-            span {
-                font-size: 1.5rem;
-                grid-area: name;
-                display: inline;
-                line-height: 1;
-                color: var(--color-muted-3);
-
-                @media (width < 650px) {
-                    display: none;
-                }
-            }
         }
         p {
             grid-area: desc;
