@@ -2,9 +2,8 @@ import flask as f
 from click import secho
 from pydantic import ValidationError
 
-# import authentik_client
-
 from .settings import Settings
+from .auth import AuthentikAuthProvider
 
 
 def create_app():
@@ -20,13 +19,24 @@ def create_app():
         secho(e)
         raise SystemExit(1)
 
+    if settings.auth.apps.enabled:
+        match settings.auth.apps.provider:
+            case "authentik":
+                auth = AuthentikAuthProvider(settings.auth.apps.host, settings.auth.apps.token)
+
     @app.route("/")
     def index():
+        user = None
+        apps = []
+
         if settings.auth.enabled:
             user = f.request.headers.get(settings.auth.header)
             user = settings.auth.default_user if user is None else user
 
-        return f.render_template("index.html.jinja", settings=settings, user=user)
+            if settings.auth.apps.enabled:
+                apps = auth.get_applications(user)
+
+        return f.render_template("index.html.jinja", settings=settings, user=user, apps=apps)
 
     @app.route("/about")
     def about():

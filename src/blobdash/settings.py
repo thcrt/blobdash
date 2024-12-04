@@ -1,6 +1,4 @@
-from typing import Tuple, Type, Optional
-
-import urllib.parse
+from typing import Tuple, Type, Optional, Literal
 
 from pydantic import BaseModel
 from pydantic_extra_types import color
@@ -12,17 +10,19 @@ from pydantic_settings import (
 )
 
 
+class AuthApplicationSettings(BaseModel):
+    enabled: bool = False
+    provider: Literal["authentik"] = "authentik"
+    host: str = "https://auth.example.com"
+    token: str = "changeme"
+
+
 class AuthSettings(BaseModel):
     enabled: bool = False
     header: str = "X-App-User"
+    logout_url: str = "/flows/-/default/invalidation"
     default_user: Optional[str] = None
-    host: str = "https://auth.example.com"
-    token: str = "changeme"
-    logout_flow: str = "/flows/-/default/invalidation"
-
-    @property
-    def logout_url(self):
-        return urllib.parse.urljoin(self.host, self.logout_flow)
+    apps: AuthApplicationSettings = AuthApplicationSettings()
 
 
 class DashdotSettings(BaseModel):
@@ -35,13 +35,6 @@ class DashdotSettings(BaseModel):
         "ram",
         "network",
     ]
-
-
-class Service(BaseModel):
-    name: str = "service"
-    desc: str = "a cool service"
-    icon: str = "/static/blobcat.png"
-    url: str = "https://google.com"
 
 
 class Settings(BaseSettings):
@@ -62,12 +55,6 @@ class Settings(BaseSettings):
 
     auth: AuthSettings = AuthSettings()
     dashdot: DashdotSettings = DashdotSettings()
-
-    services: dict[str, Service] = {
-        "example1": Service(),
-        "example2": Service(),
-        "example3": Service(),
-    }
 
     model_config = SettingsConfigDict(toml_file=["blobdash.toml", "/blobdash.toml"])
 

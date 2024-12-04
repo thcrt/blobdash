@@ -89,13 +89,13 @@
         </div>
     </dialog>
     <main>
-        {% for service in settings.services.values() %}
-        <a href="{{ service.url }}">
-            <img src="{{ service.icon }}">
+        {% for app in apps %}
+        <a href="{{ app.url }}">
+            <img src="{{ app.icon }}">
             <h3>
-                {{ service.name }}<span>.{{ service.domain | default(settings.service_domain) }}</span>
+                {{ app.name }}
             </h3>
-            <p>{{ service.desc }}</p>
+            <p>{{ app.desc }}</p>
         </a>
         {% endfor %} 
     </main>
