@@ -2,8 +2,10 @@ import flask as f
 from click import secho
 from pydantic import ValidationError
 
+
 from .settings import Settings
 from .auth import AuthentikAuthProvider
+from .applications import ApplicationProvider
 
 
 def create_app():
@@ -22,19 +24,23 @@ def create_app():
     if settings.auth.apps.enabled:
         match settings.auth.apps.provider:
             case "authentik":
-                auth = AuthentikAuthProvider(settings.auth.apps.host, settings.auth.apps.token)
+                auth_provider = AuthentikAuthProvider(
+                    settings.auth.apps.host, settings.auth.apps.token
+                )
+    else:
+        auth_provider = None
+
+    app_provider = ApplicationProvider(auth_provider, settings.apps)
 
     @app.route("/")
     def index():
         user = None
-        apps = []
 
         if settings.auth.enabled:
             user = f.request.headers.get(settings.auth.header)
             user = settings.auth.default_user if user is None else user
 
-            if settings.auth.apps.enabled:
-                apps = auth.get_applications(user)
+        apps = app_provider.get_applications(user)
 
         return f.render_template("index.html.jinja", settings=settings, user=user, apps=apps)
 

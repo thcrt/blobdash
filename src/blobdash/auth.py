@@ -12,7 +12,7 @@ class AuthProvider(ABC):
         self.token = token
 
     @abstractmethod
-    def get_applications(uid):
+    def get_applications(self, username):
         pass
 
 
@@ -39,16 +39,15 @@ class AuthentikAuthProvider(AuthProvider):
         user = self._api.core_users_list(username=username).results[0]
         list = self._api.core_applications_list(for_user=user.pk)
 
-        return [
-            Application(
+        return {
+            app.slug: Application(
                 name=app.name,
-                id=app.slug,
                 url=app.launch_url,
                 icon=urllib.parse.urljoin(self.host, app.meta_icon),
                 desc=app.meta_description,
             )
             for app in list.results
-        ]
+        }
 
     # We need to subclass the `ApiClient` class from the official `authentik-client` library, to
     # avoid a bug that throws ValidationErrors due to unexpectedly returned None values. This is a

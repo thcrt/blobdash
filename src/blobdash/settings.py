@@ -9,6 +9,8 @@ from pydantic_settings import (
     TomlConfigSettingsSource,
 )
 
+from .applications import Application
+
 
 class AuthApplicationSettings(BaseModel):
     enabled: bool = False
@@ -53,8 +55,9 @@ class Settings(BaseSettings):
     non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>"""
 
-    auth: AuthSettings = AuthSettings()
     dashdot: DashdotSettings = DashdotSettings()
+    auth: AuthSettings = AuthSettings()
+    apps: dict[str, Application] = {}
 
     model_config = SettingsConfigDict(toml_file=["blobdash.toml", "/blobdash.toml"])
 

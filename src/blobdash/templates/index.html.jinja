@@ -89,7 +89,7 @@
         </div>
     </dialog>
     <main>
-        {% for app in apps %}
+        {% for app in apps.values() %}
         <a href="{{ app.url }}">
             <img src="{{ app.icon }}">
             <h3>
