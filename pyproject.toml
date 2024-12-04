@@ -1,6 +1,6 @@
 [project]
 name = "blobdash"
-version = "0.4.0"
+version = "0.4.1-dev"
 readme = "README.md"
 authors = [
     { name = "thcrt", email = "110127860+thcrt@users.noreply.github.com" }
