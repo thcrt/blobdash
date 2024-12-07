@@ -18,12 +18,21 @@ class AuthentikSettings(BaseModel):
     token: str
 
 
+class KeycloakSettings(BaseModel):
+    provider: Literal["keycloak"]
+    host: str
+    auth_realm: Optional[str] = None
+    realm: str
+    id: str
+    secret: str
+
+
 class AuthSettings(BaseModel):
     enabled: bool = False
     header: str = "X-App-User"
     logout_url: str = "/flows/-/default/invalidation"
     default_user: Optional[str] = None
-    fetch: Optional[AuthentikSettings] = None
+    fetch: Optional[AuthentikSettings | KeycloakSettings] = None
 
 
 class DashdotSettings(BaseModel):
