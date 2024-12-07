@@ -4,7 +4,7 @@ from pydantic import ValidationError
 
 
 from .settings import Settings
-from .auth import AuthentikAuthProvider, KeycloakAuthProvider
+from .auth import AuthentikAuthProvider
 from .applications import ApplicationProvider
 
 
