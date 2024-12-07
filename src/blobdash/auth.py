@@ -3,6 +3,7 @@ import urllib.parse
 from abc import ABC, abstractmethod
 
 import authentik_client
+from mantelo import KeycloakAdmin
 
 from .applications import Application
 
@@ -11,6 +12,45 @@ class AuthProvider(ABC):
     @abstractmethod
     def get_applications(self, username):
         pass
+
+
+class KeycloakAuthProvider(AuthProvider):
+    def __init__(self, host, realm, auth_realm, id, secret):
+        self.host = host
+        self.realm = realm
+        self.auth_realm = realm if auth_realm is None else auth_realm
+        self.id = id
+        self.secret = secret
+
+        self._api = KeycloakAdmin.from_client_credentials(
+            server_url=self.host,
+            realm_name=self.realm,
+            authentication_realm_name=self.auth_realm,
+            client_id=self.id,
+            client_secret=self.secret,
+        )
+
+    def get_applications(self, username):
+        # Get user ID from username. Returns a list of user objects, so choose the first (and only)
+        # entry and grab its ID.
+        user = self._api.users.get(username=username, exact=True)[0]["id"]
+
+        # Get a list of all clients the user has logged into, by cycling through consents for the
+        # user ID and grabbing the client object associated with that client ID
+        clients = [
+            self._api.clients.get(clientId=consent["clientId"])[0]
+            for consent in self._api.users(user).consents.get()
+        ]
+
+        return {
+            client["clientId"]: Application(
+                name=client["name"],
+                url=client["baseUrl"],
+                icon=client["attributes"]["logoUri"],
+                desc=client["description"],
+            )
+            for client in clients
+        }
 
 
 class AuthentikAuthProvider(AuthProvider):
