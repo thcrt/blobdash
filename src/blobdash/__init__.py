@@ -4,7 +4,7 @@ from pydantic import ValidationError
 
 
 from .settings import Settings
-from .auth import AuthentikAuthProvider
+from .auth import AuthentikAuthProvider, KeycloakAuthProvider
 from .applications import ApplicationProvider
 
 
@@ -21,14 +21,13 @@ def create_app():
         secho(e)
         raise SystemExit(1)
 
-    if settings.auth.apps.enabled:
-        match settings.auth.apps.provider:
-            case "authentik":
-                auth_provider = AuthentikAuthProvider(
-                    settings.auth.apps.host, settings.auth.apps.token
-                )
-    else:
-        auth_provider = None
+    match settings.auth.fetch.provider:
+        case "authentik":
+            auth_provider = AuthentikAuthProvider(
+                settings.auth.fetch.host, settings.auth.fetch.token
+            )
+        case None:
+            auth_provider = None
 
     app_provider = ApplicationProvider(auth_provider, settings.apps)
 

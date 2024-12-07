@@ -12,11 +12,10 @@ from pydantic_settings import (
 from .applications import Application
 
 
-class AuthApplicationSettings(BaseModel):
-    enabled: bool = False
-    provider: Literal["authentik"] = "authentik"
-    host: str = "https://auth.example.com"
-    token: str = "changeme"
+class AuthentikSettings(BaseModel):
+    provider: Literal["authentik"]
+    host: str
+    token: str
 
 
 class AuthSettings(BaseModel):
@@ -24,7 +23,7 @@ class AuthSettings(BaseModel):
     header: str = "X-App-User"
     logout_url: str = "/flows/-/default/invalidation"
     default_user: Optional[str] = None
-    apps: AuthApplicationSettings = AuthApplicationSettings()
+    fetch: Optional[AuthentikSettings] = None
 
 
 class DashdotSettings(BaseModel):

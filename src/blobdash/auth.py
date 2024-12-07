@@ -1,16 +1,13 @@
 import json
 import urllib.parse
 from abc import ABC, abstractmethod
+
 import authentik_client
 
 from .applications import Application
 
 
 class AuthProvider(ABC):
-    def __init__(self, host: str, token: str) -> None:
-        self.host = host
-        self.token = token
-
     @abstractmethod
     def get_applications(self, username):
         pass
@@ -19,9 +16,8 @@ class AuthProvider(ABC):
 class AuthentikAuthProvider(AuthProvider):
     def __init__(self, host, token):
         # Base path for Authentik API
-        host = urllib.parse.urljoin(host, "/api/v3")
-
-        super().__init__(host, token)
+        self.host = urllib.parse.urljoin(host, "/api/v3")
+        self.token = token
 
         # Set up API client. The `CoreAPI` is the only one we need to view users and applications
         self._api = authentik_client.CoreApi(
