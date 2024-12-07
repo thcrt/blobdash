@@ -65,20 +65,19 @@ The URL to which users should be redirected when logging out, in order to invali
 ### `auth.default_user`
 Requests that do not have the HTTP header specified by `auth.header` set will be treated as though there is a user logged in with the username set here. By default, this is unset, and requests without the appropriate header will be treated as unauthenticated.
 
-### `auth.apps.enabled`
-This determines whether blobdash should query the API of the authentication provider to get a list of apps to display.
+### `auth.fetch.provider`
+The software being used as an authentication provider.  This allows blobdash to query the API of the authentication provider in order to to get a list of apps to display. If it is not set, which is the case by default, this functionality will be disabled.
 
-Application fetching from the authentication provider's API will be enabled if both `auth.enabled` and `auth.apps.enabled` are set to `true`. If either is set to `false`, application fetching will be disabled. This is because querying the API requires a username to show applications available to that user.
+If `auth.enabled` is set to `false`, application fetching will be disabled, regardless of whether `auth.fetch.provider` is set. This is because in order for blobdash to query the API for available applications, it must first know which user is currently logged in.
 
 If application fetching is disabled, blobdash can still be used in 'single-user mode' by manually adding applications under `apps`.
 
-### `auth.apps.provider`
-The software being used as an authentication provider. Right now, the only supported authentication provider is [authentik](https://goauthentik.io/), and hence the only allowed value is `"authentik"`. This is also the default value, and this field can be safely left out of your configuration. It exists for future expansion to accomodate other providers.
+Right now, the only supported authentication provider is [authentik](https://goauthentik.io/), and hence the only allowed value is `"authentik"`. This is also the default value, and this field can be safely left out of your configuration. It exists for future expansion to accomodate other providers.
 
-### `host`
+### `auth.fetch.host`
 The host at which the authentication provider can be reached, e.g. `"https://auth.example.com"`.
 
-### `token`
+### `auth.fetch.token`
 The token to authenticate with the provider's API. The user for whom this token was generated must have access to view users and applications. For security, it's a good idea to create a service account with only the minimum permissions necessary. 
 
 ## `apps`
