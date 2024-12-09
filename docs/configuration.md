@@ -98,3 +98,8 @@ The URL to an icon representing the app.
 
 ### `apps.<app-name>.url`
 The URL at which the app is hosted, to which the user will be redirected when clicking it.
+
+### `apps.<app-name>.hidden`
+Set to `true` to mark an app as hidden and prevent it being shown to users. 
+
+If an app is fetched from authentik with `auth.fetch`, this will be set to `true` if the app's launch URL is `blank://blank`, as this is how authentik natively hides apps ([docs](https://docs.goauthentik.io/docs/add-secure-apps/applications/manage_apps#hide-applications)).
