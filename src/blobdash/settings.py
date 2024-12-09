@@ -1,5 +1,4 @@
 from typing import Tuple, Type, Optional, Literal
-from abc import ABCMeta
 
 from pydantic import BaseModel
 from pydantic_extra_types import color

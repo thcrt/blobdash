@@ -1,6 +1,6 @@
 import flask as f
 from click import secho
-from pydantic import ValidationError, BaseModel
+from pydantic import ValidationError
 
 
 from .settings import Settings
