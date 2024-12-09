@@ -41,6 +41,10 @@ class AuthentikAuthProvider(AuthProvider):
                 url=app.launch_url,
                 icon=urllib.parse.urljoin(self.host, app.meta_icon),
                 desc=app.meta_description,
+                hidden=(
+                    (parsed_url := urllib.parse.urlparse(app.launch_url)).scheme == "blank"
+                    and parsed_url.netloc == "blank"
+                ),
             )
             for app in list.results
         }

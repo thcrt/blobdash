@@ -90,13 +90,15 @@
     </dialog>
     <main>
         {% for app in apps.values() %}
-        <a href="{{ app.url }}">
-            <img src="{{ app.icon }}">
-            <h3>
-                {{ app.name }}
-            </h3>
-            <p>{{ app.desc }}</p>
-        </a>
+            {% if not app.hidden %}
+                <a href="{{ app.url }}">
+                    <img src="{{ app.icon }}">
+                    <h3>
+                        {{ app.name }}
+                    </h3>
+                    <p>{{ app.desc }}</p>
+                </a>
+            {% endif %}
         {% endfor %} 
     </main>
 </body>

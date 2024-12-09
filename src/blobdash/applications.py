@@ -14,6 +14,7 @@ class Application:
     url: Optional[str] = None
     icon: Optional[str] = None
     desc: Optional[str] = None
+    hidden: bool = False
 
 
 class ApplicationProvider:
