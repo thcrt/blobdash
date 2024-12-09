@@ -1,6 +1,6 @@
 import flask as f
 from click import secho
-from pydantic import ValidationError
+from pydantic import ValidationError, BaseModel
 
 
 from .settings import Settings
@@ -21,7 +21,7 @@ def create_app():
         secho(e)
         raise SystemExit(1)
 
-    match settings.auth.fetch.provider:
+    match settings.auth.provider:
         case "authentik":
             auth_provider = AuthentikAuthProvider(
                 settings.auth.fetch.host, settings.auth.fetch.token

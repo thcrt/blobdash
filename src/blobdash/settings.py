@@ -1,4 +1,5 @@
 from typing import Tuple, Type, Optional, Literal
+from abc import ABCMeta
 
 from pydantic import BaseModel
 from pydantic_extra_types import color
@@ -24,6 +25,10 @@ class AuthSettings(BaseModel):
     logout_url: str = "/flows/-/default/invalidation"
     default_user: Optional[str] = None
     fetch: Optional[AuthentikSettings] = None
+
+    @property
+    def provider(self):
+        return self.fetch.provider if self.fetch is not None else None
 
 
 class DashdotSettings(BaseModel):
