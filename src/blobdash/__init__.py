@@ -26,6 +26,14 @@ def create_app():
             auth_provider = AuthentikAuthProvider(
                 settings.auth.fetch.host, settings.auth.fetch.token
             )
+        case "keycloak":
+            auth_provider = KeycloakAuthProvider(
+                settings.auth.fetch.host,
+                settings.auth.fetch.realm,
+                settings.auth.fetch.auth_realm,
+                settings.auth.fetch.id,
+                settings.auth.fetch.secret,
+            )
         case None:
             auth_provider = None
 
